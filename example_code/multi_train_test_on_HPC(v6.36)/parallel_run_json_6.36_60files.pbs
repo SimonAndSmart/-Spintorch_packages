@@ -1,0 +1,25 @@
+ #!/bin/bash
+#PBS -l walltime=72:00:00
+#PBS -l select=1:ncpus=1:mem=99gb
+#PBS -J 1-60
+#PBS -o job_outs/
+#PBS -e job_outs/
+
+# set up environment
+module load anaconda3/personal
+conda init bash
+source ~/.bashrc
+conda activate SpinT_env
+
+# Get the directory of the current PBS file and change to that directory
+cd "${PBS_O_WORKDIR}"
+
+# Find all JSON files in the specified directory and add them to the array
+json_files=($(find "${PBS_O_WORKDIR}/json_files" -maxdepth 1 -name "*.json" -type f))
+# Get the index of the current job in the array
+json_file_index=$((PBS_ARRAY_INDEX-1))
+
+# Run the Python script with the JSON file at the current index
+py_file=$(ls *.py)
+ipython "$py_file" -- --json_file=${json_files[$json_file_index]}
+
