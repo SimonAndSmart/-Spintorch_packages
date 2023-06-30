@@ -17,7 +17,10 @@ mpl.rcParams['figure.dpi'] = 600
 
 def plot_loss(loss_iter, plotdir):
     fig = plt.figure()
-    plt.plot(loss_iter, 'o-')
+    if len(loss_iter)>=200:    # changes here _sinan
+        plt.plot(loss_iter, 'x-')
+    else:
+        plt.plot(loss_iter, 'o-')
     plt.xlabel("Epoch")
     plt.ylabel("Loss")
     plt.gca().xaxis.set_major_locator(MaxNLocator(integer=True))
