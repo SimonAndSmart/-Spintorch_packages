@@ -24,7 +24,7 @@ def plot_loss(loss_iter, plotdir):
     plt.xlabel("Epoch")
     plt.ylabel("Loss")
     plt.gca().xaxis.set_major_locator(MaxNLocator(integer=True))
-    fig.savefig(plotdir+'aa_loss.png')
+    fig.savefig(plotdir+'_loss.png')
     plt.close(fig)
     
 def plot_loss_dict(loss_dict, plotdir):   # function added _sinan
@@ -37,7 +37,7 @@ def plot_loss_dict(loss_dict, plotdir):   # function added _sinan
     plt.ylabel("Loss")
     plt.legend(loc='upper right')
     plt.gca().xaxis.set_major_locator(MaxNLocator(integer=True))
-    fig.savefig(plotdir+'aa_separate_loss.png')
+    fig.savefig(plotdir+'_separate_loss.png')
     plt.close(fig)
     
 def plot_output(u, label, epoch, plotdir): #changes here _sinan
