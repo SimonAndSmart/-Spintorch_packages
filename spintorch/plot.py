@@ -27,9 +27,10 @@ def plot_loss(loss_iter, plotdir):
     fig.savefig(plotdir+'_loss.png')
     plt.close(fig)
     
-def plot_loss_dict(loss_dict, plotdir):   # function added _sinan
+def plot_loss_dict(loss_dict, plotdir, exclude_keys=['min_loss']):   # function added _sinan
     dist = {key: [np.nan if value is None else value for value in values]
-        for key, values in loss_dict.items()} # convert None into NaN
+            for key, values in loss_dict.items() if key not in exclude_keys}  # convert None into NaN and exclude specific keys
+    
     fig = plt.figure()
     for label in dist.keys():
         plt.plot(dist[label], marker = '.' ,label=f'label:{label}')
@@ -39,6 +40,7 @@ def plot_loss_dict(loss_dict, plotdir):   # function added _sinan
     plt.gca().xaxis.set_major_locator(MaxNLocator(integer=True))
     fig.savefig(plotdir+'_separate_loss.png')
     plt.close(fig)
+
     
 def plot_output(u, label, epoch, plotdir): #changes here _sinan
     fig = plt.figure(dpi=200)
