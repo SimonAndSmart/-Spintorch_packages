@@ -57,7 +57,11 @@ def plot_multiple_outputs(probe_reading, labels,epoch_batch, plotdir): #added fu
     nrows = num_plots // ncols if num_plots % ncols == 0 else num_plots // ncols + 1
 
     fig, axs = plt.subplots(nrows, ncols, figsize=(ncols*4, nrows*4),sharey=True,dpi=150) # Change figsize as needed
-    axs = axs.flatten()  # Flattening to allow easy iteration
+    
+    if num_plots == 1:# If there is only one subplot, put it in a list to make it iterable
+        axs = [axs]
+    else:# Otherwise, flatten axs to iterate over it
+        axs = axs.flatten()  # Flattening to allow easy iteration
 
     # plot each output in a separate subplot
     for sig in range(num_plots):
